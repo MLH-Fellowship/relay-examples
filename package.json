@@ -6,6 +6,8 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-relay": "^0.0.0-experimental-94e87455",
@@ -15,7 +17,7 @@
   "scripts": {
     "start": "yarn run relay && react-scripts start",
     "build": "yarn run relay && react-scripts build",
-    "relay":"yarn run relay-compiler --schema schema.graphql --src ./src/ --watchman false $@",
+    "relay": "yarn run relay-compiler --schema schema.graphql --src ./src/ --watchman false $@",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -39,5 +41,9 @@
     "graphql": "^15.1.0",
     "relay-compiler": "^9.1.0"
   },
-  "keywords": ["relay", "react", "starter"]
+  "keywords": [
+    "relay",
+    "react",
+    "starter"
+  ]
 }
