@@ -171,7 +171,7 @@ const MarkAllTodosMutation = new mutationWithClientMutationId({
       resolve: getViewer,
     },
     changedTodos: {
-      type: new GraphQLList(Todo),
+      type: new GraphQLList(TodoType),
       resolve: ({ changedTodoIds }) => changedTodoIds.map(getTodo),
     },
   },
