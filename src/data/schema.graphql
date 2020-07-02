@@ -1,16 +1,11 @@
-schema {
-    query: Root,
-    mutation: Mutation
-}
-
 type Root {
-    viewer: user
+    viewer: User
     node(id:ID!):Node
 }
 
 type User implements Node {
     id: ID!
-    todos(status: String='any', after:String, before:String,first:Int, last:Int): TodoConnection
+    todos(status: String="any", after:String, before:String, first:Int, last:Int): TodoConnection
     numTodo: Int
     numTodosCompleted:Int
 }
@@ -115,4 +110,9 @@ type RenameTodoInput{
 type RenameTodoPayload {
     todo: Todo
     clientMutationId: String
+}
+
+schema {
+    query: Root
+    mutation: Mutation
 }
