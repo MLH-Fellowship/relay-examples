@@ -51,7 +51,7 @@ type Mutation {
     renameTodo(input:RenameTodoInput!): RenameTodoPayload
 }
 
-type AddTodoInput {
+input AddTodoInput {
     text: String!
     clientMutationId: String
 }
@@ -62,7 +62,7 @@ type AddTodoPayload {
     clientMutationId: String
 }
 
-type ChangeTodoStatusInput{
+input ChangeTodoStatusInput{
     id:ID!
     complete:Boolean!
     clientMutationId: String
@@ -74,7 +74,7 @@ type ChangeTodoStatusPayload {
     clientMutationId: String
 }
 
-type MarkAllTodoInput {
+input MarkAllTodoInput {
     complete: Boolean!
     clientMutationId: String
 }
@@ -85,7 +85,7 @@ type MarkAllTodoPayload {
     clientMutationId: String
 }
 
-type RemoveCompletedTodosInput {
+input RemoveCompletedTodosInput {
     clientMutationId: String
 }
 
@@ -95,7 +95,7 @@ type RemoveCompletedTodosPayload {
     clientMutationId: String
 }
 
-type RemoveTodoInput{
+input RemoveTodoInput{
     id: ID!
     clientMutationId: String
 }
@@ -106,7 +106,7 @@ type RemoveTodoPayload {
     clientMutationId: String
 }
 
-type RenameTodoInput{
+input RenameTodoInput{
     id: ID!
     text: String!
     clientMutationId: String
