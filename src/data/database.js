@@ -1,5 +1,5 @@
-export class Todo extends Object {}
-export class User extends Object {}
+export const Todo = new Object();
+export const User = new Object();
 
 const VIEWER_ID = 'user';
 
@@ -15,7 +15,7 @@ const todosIdsByUser = {
 };
 let nextToDoId = 0;
 
-export function addToDo(text, complete) {
+export function addTodo(text, complete) {
   const todo = new Todo();
   Object.assign(todo, {
     id: `${nextToDoId++}`,
@@ -29,8 +29,8 @@ export function addToDo(text, complete) {
   return todo.id;
 }
 
-addToDo('Learn Relay', true);
-addToDo('Implement Relay', false);
+addTodo('Learn Relay', true);
+addTodo('Implement Relay', false);
 
 export function getTodo(id) {
   return todosById[id];
@@ -61,7 +61,7 @@ export function getViewer() {
 export function markAllTodos(complete) {
   const changeTodos = [];
   getTodos().forEach((todo) => {
-    if (todo.complete !== 'completed') {
+    if (todo.complete !== complete) {
       todo.complete = complete;
       changeTodos.push(todo);
     }
@@ -77,7 +77,7 @@ export function removeTodo(id) {
   delete todosById[id];
 }
 
-export function removeCompletedToDos() {
+export function removeCompletedTodos() {
   const todosToRemove = getTodos().filter((todo) => todo.complete);
   todosToRemove.forEach((todo) => removeTodo(todo.id));
   return todosToRemove.map((todo) => todo.id);
