@@ -22,11 +22,11 @@ import {
 import {
   Todo,
   User,
-  addToDo,
+  addTodo,
   getTodo,
   getTodos,
   getUser,
-  removeCompletedToDos,
+  removeCompletedTodos,
   removeTodo,
   renameTodo,
   getViewer,
@@ -132,7 +132,7 @@ const AddTodoMutation = new mutationWithClientMutationId({
     },
   },
   mutateAndGetPayload: ({ text }) => {
-    const todoId = addToDo(text);
+    const todoId = addTodo(text);
     return { todoId };
   },
 });
@@ -194,7 +194,7 @@ const RemoveCompletedTodosMutation = new mutationWithClientMutationId({
     },
   },
   mutateAndGetPayload: () => {
-    const deletedTodoIds = removeCompletedToDos();
+    const deletedTodoIds = removeCompletedTodos();
     const deletedIds = deletedTodoIds.map(toGlobalId.bind(null, 'Todo'));
     return { deletedIds };
   },
