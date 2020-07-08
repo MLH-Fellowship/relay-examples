@@ -1,5 +1,5 @@
-export const Todo = new Object();
-export const User = new Object();
+export const Todo = {};
+export const User = {};
 
 const VIEWER_ID = 'user';
 
@@ -16,15 +16,21 @@ const todosIdsByUser = {
 let nextToDoId = 0;
 
 export function addTodo(text, complete) {
-  const todo = new Todo();
-  Object.assign(todo, {
-    id: `${nextToDoId++}`,
-    complete: Boolean(complete),
+  const todo = {
+    id: `${nextToDoId}`,
     text,
-  });
+    complete: Boolean(complete),
+  };
 
-  todosById[todo.id] = todo;
-  todosIdsByUser[VIEWER_ID].push(todo.id);
+  todosById = {
+    ...todosById,
+    [todo.id]: todo,
+  };
+
+  todosIdsByUser = {
+    ...todosIdsByUser,
+    [VIEWER_ID]: [...todosIdsByUser[VIEWER_ID], todo.id],
+  };
 
   return todo.id;
 }
@@ -45,9 +51,13 @@ export function getTodos(status = 'any') {
   return todos.filter((todo) => todo.complete === (status === 'completed'));
 }
 
+// TODO: Evaluate
 export function changeTodoStatus(id, complete) {
   const todo = getTodo(id);
-  todo.complete = complete;
+  const newTodo = {
+    ...todo,
+    complete: complete,
+  };
 }
 
 export function getUser() {
@@ -58,17 +68,22 @@ export function getViewer() {
   return getUser(VIEWER_ID);
 }
 
+// TODO: Done?
 export function markAllTodos(complete) {
   const changeTodos = [];
   getTodos().forEach((todo) => {
     if (todo.complete !== complete) {
-      todo.complete = complete;
-      changeTodos.push(todo);
+      const newTodo = {
+        ...todo,
+        complete: complete,
+      };
+      changeTodos.push(newTodo);
     }
   });
   return changeTodos.map((todo) => todo.id);
 }
 
+// TODO: Evaluate
 export function removeTodo(id) {
   const todoIndex = todosIdsByUser[VIEWER_ID].indexOf(id);
   if (todoIndex !== -1) {
@@ -77,13 +92,17 @@ export function removeTodo(id) {
   delete todosById[id];
 }
 
+// TODO: Done?
 export function removeCompletedTodos() {
-  const todosToRemove = getTodos().filter((todo) => todo.complete);
-  todosToRemove.forEach((todo) => removeTodo(todo.id));
-  return todosToRemove.map((todo) => todo.id);
+  const incompleteTodos = getTodos().filter((todo) => !todo.complete);
+  return incompleteTodos;
 }
 
+// TODO: Evaluate
 export function renameTodo(id, text) {
-  const todo = getTodo(id);
-  todo.text = text;
+  const oldTodo = getTodo(id);
+  const newTodo = {
+    ...oldTodo,
+    text: text,
+  };
 }
