@@ -41,6 +41,7 @@ export function getViewer() {
 
 // Mutations
 
+// Updated
 export function addTodo(text, complete) {
   const todo = {
     id: `${nextToDoId}`,
@@ -48,15 +49,18 @@ export function addTodo(text, complete) {
     complete: Boolean(complete),
   };
 
-  todosById = {
+  const newTodosById = {
     ...todosById,
     [todo.id]: todo,
   };
 
-  todosIdsByUser = {
+  const newTodosIdsByUser = {
     ...todosIdsByUser,
     [VIEWER_ID]: [...todosIdsByUser[VIEWER_ID], todo.id],
   };
+
+  todosById = newTodosById;
+  todosIdsByUser = newTodosIdsByUser;
 
   return todo.id;
 }
@@ -68,6 +72,7 @@ addTodo('Implement Relay', false);
 // TODO: Update for todosIdsByUser
 export function changeTodoStatus(id, complete) {
   const oldTodo = getTodo(id);
+  
   const newTodosById = {
     ...todosById,
     id: {
@@ -77,10 +82,11 @@ export function changeTodoStatus(id, complete) {
   }
 
   todosById = newTodosById;
+
   return newTodosById;
 }
 
-// TODO: Update for todosIdsByUser
+// Updated
 export function markAllTodos(complete) {
   const newTodosById = {}
   getTodos().forEach(todo => {
@@ -94,27 +100,36 @@ export function markAllTodos(complete) {
   return newTodosById;
 }
 
-// TODO: Update for todosIdsByUser
+// Updated
 export function removeTodo(id) {
   const todoIndex = getTodos().indexOf(id);
-  let newTodosById;
+  let newTodosById, newTodosIdsByUser;
   if (todoIndex !== -1) {
-    newTodosById = todosById.filter(el => el.id !== id)
+    newTodosById = todosById.filter(todo => todo.id !== id);
+    newTodosIdsByUser = todosIdsByUser.filter(oldID => oldID !== id)
   }
 
   todosById = newTodosById;
+  todosIdsByUser = newTodosIdsByUser;
+
   return newTodosById;
 }
 
-// TODO: Update for todosIdsByUser
+// Updated
 export function removeCompletedTodos() {
   const newTodosById = getTodos().filter(todo => !todo.complete);
+  let newTodosIdsByUser = [];
+  newTodosById.forEach(todo => {
+    newTodosIdsByUser.push(todo.id)
+  })
 
   todosById = newTodosById;
+  todosIdsByUser = newTodosIdsByUser;
+
   return newTodosById;
 }
 
-// TODO: Update for todosIdsByUser
+// Updated
 export function renameTodo(id, text) {
   const oldTodo = getTodo(id);
   const newTodosById = {
