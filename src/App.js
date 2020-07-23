@@ -1,14 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { Suspense } from "react";
 import "./App.css";
-import fetchGraphQL from "./fetchGraphQL";
+import {
+  RelayEnvironmentProvider,
+} from "react-relay/hooks";
+import RelayEnvironment from "./RelayEnvironment";
 
-function App() {
+import GetTodos from './queries/getTodos'
+
+function AppRoot() {
   return (
-    <div className="App">
-      <header className="App-header">
-      </header>
-    </div>
+    <RelayEnvironmentProvider environment={RelayEnvironment}>
+      <Suspense fallback={"Loading"}>
+        <GetTodos />
+      </Suspense>
+    </RelayEnvironmentProvider>
   );
 }
 
-export default App;
+export default AppRoot;
