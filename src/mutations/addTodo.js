@@ -1,6 +1,7 @@
 import RelayEnvironment from "../RelayEnvironment";
 import {commitMutation} from 'react-relay'
 import {graphql} from 'react-relay/hooks';
+// import graphql from 'babel-plugin-relay/macro';
 
 const AddTodoMutation = graphql`
 mutation addTodoMutation($input: AddTodoInput!) {
