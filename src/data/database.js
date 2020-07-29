@@ -2,7 +2,7 @@ export const Todo = {};
 export const User = {};
 
 const VIEWER_ID = 'user';
-const viewer = new User();
+const viewer = {};
 viewer.id = VIEWER_ID;
 
 const usersById = {
@@ -61,6 +61,8 @@ export function addTodo(text, complete) {
 
   todosById = newTodosById;
   todosIdsByUser = newTodosIdsByUser;
+
+  nextToDoId = parseInt(nextToDoId) + 1;
 
   return todo.id;
 }
