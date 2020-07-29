@@ -28,7 +28,7 @@ function App() {
             <label for="markAllCompleted">Mark 13 as done! 🎉</label>
           </div>
           <div className="views">
-            <input type="radio" id="all" name="view" value="all" checked="checked"></input>
+            <input type="radio" id="all" name="view" value="all"></input>
             <label for="all">all</label>
             <input type="radio" id="active" name="view" value="active"></input>
             <label for="active">todo</label>

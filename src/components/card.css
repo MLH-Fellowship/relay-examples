@@ -39,5 +39,9 @@
 
 .text {
     font-family: monospace;
+    padding: 1rem;
+    width: 90%;
     font-size: 1.25rem;
+    border: none;
+    cursor: default;
 }
