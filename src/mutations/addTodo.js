@@ -1,9 +1,9 @@
 import RelayEnvironment from "../RelayEnvironment";
 import {commitMutation} from 'react-relay'
-import {graphql} from 'react-relay/hooks';
-// import graphql from 'babel-plugin-relay/macro';
+// import {graphql} from 'react-relay/hooks';
+import graphql from 'babel-plugin-relay/macro';
 
-const AddTodoMutation = graphql`
+export const AddTodoMutation = graphql`
 mutation addTodoMutation($input: AddTodoInput!) {
   addTodo(input: $input){
       viewer {
@@ -31,7 +31,7 @@ export const commitFunc = (item, callback) => {
         AddTodoMutation,
         variables,
         oneCompleted: () => {
-            console.log('Success')
+            console.log('Success! Added a todo!')
             callback();
         },
         oneError: err => console.log(err),
