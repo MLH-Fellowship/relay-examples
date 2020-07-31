@@ -15,7 +15,6 @@ let todosIdsByUser = {
 };
 let nextToDoId = 0;
 
-
 // Getters
 
 export function getTodo(id) {
@@ -23,11 +22,11 @@ export function getTodo(id) {
 }
 
 export function getTodos(status = 'any') {
-  const todos = todosIdsByUser[VIEWER_ID].map(id => todosById[id]);
+  const todos = todosIdsByUser[VIEWER_ID].map((id) => todosById[id]);
   if (status === 'any') {
     return todos;
   }
-  return todos.filter(todo => todo.complete === (status === 'completed'));
+  return todos.filter((todo) => todo.complete === (status === 'completed'));
 }
 
 export function getUser() {
@@ -37,7 +36,6 @@ export function getUser() {
 export function getViewer() {
   return getUser(VIEWER_ID);
 }
-
 
 // Mutations
 
@@ -74,14 +72,14 @@ addTodo('Implement Relay', false);
 // TODO: Update for todosIdsByUser
 export function changeTodoStatus(id, complete) {
   const oldTodo = getTodo(id);
-  
+
   const newTodosById = {
     ...todosById,
     id: {
       ...oldTodo,
       complete: complete,
-    }
-  }
+    },
+  };
 
   todosById = newTodosById;
 
@@ -90,12 +88,12 @@ export function changeTodoStatus(id, complete) {
 
 // Updated
 export function markAllTodos(complete) {
-  const newTodosById = {}
-  getTodos().forEach(todo => {
+  const newTodosById = {};
+  getTodos().forEach((todo) => {
     newTodosById[todo.id] = {
       ...todo,
-      complete: complete
-    }
+      complete: complete,
+    };
   });
 
   todosById = newTodosById;
@@ -104,26 +102,27 @@ export function markAllTodos(complete) {
 
 // Updated
 export function removeTodo(id) {
+  console.log('remove todo', id, getTodos());
+
   const todoIndex = getTodos().indexOf(id);
-  let newTodosById, newTodosIdsByUser;
   if (todoIndex !== -1) {
-    newTodosById = todosById.filter(todo => todo.id !== id);
-    newTodosIdsByUser = todosIdsByUser.filter(oldID => oldID !== id)
+    delete todosById[id];
+    // todosById = todosById.filter((todo) => todo.id !== id);
+    todosIdsByUser[VIEWER_ID] = todosIdsByUser[VIEWER_ID].filter(
+      (oldID) => oldID !== id
+    );
   }
 
-  todosById = newTodosById;
-  todosIdsByUser = newTodosIdsByUser;
-
-  return newTodosById;
+  return todosIdsByUser;
 }
 
 // Updated
 export function removeCompletedTodos() {
-  const newTodosById = getTodos().filter(todo => !todo.complete);
+  const newTodosById = getTodos().filter((todo) => !todo.complete);
   let newTodosIdsByUser = [];
-  newTodosById.forEach(todo => {
-    newTodosIdsByUser.push(todo.id)
-  })
+  newTodosById.forEach((todo) => {
+    newTodosIdsByUser.push(todo.id);
+  });
 
   todosById = newTodosById;
   todosIdsByUser = newTodosIdsByUser;
@@ -138,9 +137,9 @@ export function renameTodo(id, text) {
     ...todosById,
     id: {
       ...oldTodo,
-      text: text
-    }
-  }
+      text: text,
+    },
+  };
 
   todosById = newTodosById;
   return newTodosById;
