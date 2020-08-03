@@ -1,7 +1,6 @@
-import React from "react";
 import {
-    preloadQuery,
-    usePreloadedQuery
+  preloadQuery,
+  usePreloadedQuery
 } from "react-relay/hooks";
 import RelayEnvironment from "../RelayEnvironment";
 import graphql from 'babel-plugin-relay/macro';
@@ -24,15 +23,8 @@ query getTodosQuery {
 
 
 function GetTodos() {
-    const preloadedGetTodosQuery = preloadQuery(RelayEnvironment, TodoItemsQuery, {});
-    const data = usePreloadedQuery(TodoItemsQuery, preloadedGetTodosQuery);
-    return (
-      <div>
-          {data.viewer.todos.edges.map(edge => (
-            <p key={edge.node.id}>{edge.node.text}</p>
-          ))}
-      </div>
-    );
-  }
+  const preloadedGetTodosQuery = preloadQuery(RelayEnvironment, TodoItemsQuery, {});
+  return usePreloadedQuery(TodoItemsQuery, preloadedGetTodosQuery);
+}
 
 export default GetTodos;
