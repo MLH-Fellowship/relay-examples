@@ -37,7 +37,7 @@ const AddTodoBar = () => {
             onKeyDown={handleEnter} 
             placeholder="> what will you do today?" 
             className="bar"
-            />
+          />
     )
 }
 

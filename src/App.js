@@ -1,27 +1,14 @@
-import React, { useState, useEffect, Suspense } from "react";
+import React, { useState } from "react";
 
 import AddTodoBar from './components/addTodoBar';
-import "./App.css";
-
-
-import Card from './components/TodoCard';
+import TodoList from './components/TodoList';
 import GetTodos from './queries/getTodos';
 
-const todoList = [
-  {
-    id: 1,
-    text: 'Learn Relay'
-  },
-  {
-    id: 2,
-    text: 'Implement Relay'
-  }
-]
+import "./App.css";
 
-function App() {
+const App = () => {
 
   const [todos, setTodos] = useState(GetTodos());
-  console.log(todos.viewer.todos.edges)
 
   return (
     <div className="App">
@@ -46,11 +33,7 @@ function App() {
           <AddTodoBar/>
         </div>
         </div>
-        <div className="todos">
-          {todos.viewer.todos.edges.map(edge => (
-            <Card text={edge.node.text} key={edge.node.id}/>
-          ))}
-        </div>
+        <TodoList/>
       </div>
     </div>
   );
