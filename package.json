@@ -16,6 +16,7 @@
   },
   "scripts": {
     "start": "yarn run relay && react-scripts start",
+    "start-ui": "react-scripts start",
     "build": "yarn run relay && react-scripts build",
     "relay": "relay-compiler --schema ./src/data/schema.graphql --src ./src/ --watchman false $@",
     "test": "react-scripts test",
