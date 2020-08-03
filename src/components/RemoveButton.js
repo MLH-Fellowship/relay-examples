@@ -12,7 +12,10 @@ const RemoveButton = ({ id }) => {
           id: id,
         },
       },
-      onCompleted: () => console.log(id),
+      onCompleted: data => {
+        console.log(data)
+        console.log(id)
+      },
       onError: (err) => console.log(err),
     });
   };

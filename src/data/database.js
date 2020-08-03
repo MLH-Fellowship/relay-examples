@@ -102,7 +102,6 @@ export function markAllTodos(complete) {
 
 // Updated
 export function removeTodo(id) {
-  console.log('remove todo', id, getTodos());
 
   const todoIndex = getTodos().indexOf(id);
   if (todoIndex !== -1) {

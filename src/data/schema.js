@@ -216,8 +216,6 @@ const RemoveTodoMutation = new mutationWithClientMutationId({
     },
   },
   mutateAndGetPayload: ({ id }) => {
-    console.log('mutateAndGetPayload', id);
-    // const { id: todoId } = fromGlobalId(id);
     removeTodo(id);
     return { id };
   },
