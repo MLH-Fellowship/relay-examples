@@ -8,7 +8,17 @@ import "./App.css";
 
 const App = () => {
 
-  const [todos, setTodos] = useState(GetTodos());
+const [todos, setTodos] = useState(GetTodos());
+const todoList = [
+  {
+    id: 1,
+    text: 'Learn Relay',
+  },
+  {
+    id: 2,
+    text: 'Implement Relay',
+  },
+];
 
   return (
     <div className="App">

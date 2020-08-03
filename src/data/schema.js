@@ -216,8 +216,9 @@ const RemoveTodoMutation = new mutationWithClientMutationId({
     },
   },
   mutateAndGetPayload: ({ id }) => {
-    const { id: todoId } = fromGlobalId(id);
-    removeTodo(todoId);
+    console.log('mutateAndGetPayload', id);
+    // const { id: todoId } = fromGlobalId(id);
+    removeTodo(id);
     return { id };
   },
 });
@@ -248,7 +249,7 @@ const Mutation = new GraphQLObjectType({
     changeTodoStatus: ChangeTodoStatusMutation,
     markAllTodos: MarkAllTodosMutation,
     removeTodosMutation: RemoveCompletedTodosMutation,
-    removeTodos: RemoveTodoMutation,
+    removeTodo: RemoveTodoMutation,
     renameTodo: RenameTodoMutation,
   },
 });
