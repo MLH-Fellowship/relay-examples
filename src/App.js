@@ -1,5 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, Suspense } from "react";
+
+import AddTodoBar from './components/addTodoBar';
 import "./App.css";
+
+
 import Card from './components/TodoCard';
 import GetTodos from './queries/getTodos';
 
@@ -14,7 +18,7 @@ const todoList = [
   }
 ]
 
-function AppRoot() {
+function App() {
 
   const [todos, setTodos] = useState(GetTodos());
   console.log(todos.viewer.todos.edges)
@@ -35,11 +39,11 @@ function AppRoot() {
             <input type="radio" id="active" name="view" value="active"></input>
             <label htmlFor="active">todo</label>
             <input type="radio" id="completed" name="view" value="completed"></input>
-            <label htmlFor="completed">7 completed 💪</label>
+            <label htmlFor="completed">7 done 💪</label>
           </div>
         </div>
         <div className="inputField">
-          <input placeholder="> what will you do today?" className="bar"></input>
+          <AddTodoBar/>
         </div>
         </div>
         <div className="todos">
@@ -52,4 +56,4 @@ function AppRoot() {
   );
 }
 
-export default AppRoot;
+export default App
