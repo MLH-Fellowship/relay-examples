@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import {useMutation} from 'react-relay/hooks'
-import {AddTodoMutation, commitFunc} from '../mutations/addTodo'
+import {AddTodoMutation} from '../mutations/addTodo'
 
 const AddTodoBar = () => {
     const [curTodo, setCurTodo] = useState('');
@@ -25,7 +25,10 @@ const AddTodoBar = () => {
         onCompleted(data){
           setCurTodo('')
           console.log(data)
-      },
+        },
+        onError: err => {
+          console.log(err)
+        }
       })
     }
 
