@@ -136,7 +136,7 @@ export function renameTodo(id, text) {
   const oldTodo = getTodo(id);
   const newTodosById = {
     ...todosById,
-    id: {
+    [id]: {
       ...oldTodo,
       text: text,
     },
