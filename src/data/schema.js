@@ -59,7 +59,7 @@ const { nodeInterface, nodeField } = nodeDefinitions(
 const TodoType = new GraphQLObjectType({
   name: 'Todo',
   fields: {
-    id: globalIdField(),
+    id: { type: GraphQLNonNull(GraphQLID) },
     text: { type: GraphQLString },
     complete: { type: GraphQLBoolean },
   },
