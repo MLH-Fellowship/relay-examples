@@ -4,7 +4,6 @@ import Card from './TodoCard';
 
 
 const TodoList = () => {
-  console.log(GetTodos())
     return (
         <div className="todos">
           {GetTodos().viewer.todos.edges.map(edge => (

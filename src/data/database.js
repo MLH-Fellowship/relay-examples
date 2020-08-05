@@ -68,18 +68,19 @@ export function addTodo(text, complete) {
 addTodo("Learn Relay", true);
 addTodo("Implement Relay", false);
 
-// TODO: Update for todosIdsByUser
 export function changeTodoStatus(id, complete) {
+  
   const oldTodo = getTodo(id);
   const newTodosById = {
     ...todosById,
-    id: {
+    [id]: {
       ...oldTodo,
       complete: complete,
     },
   };
 
   todosById = newTodosById;
+  console.log(todosById)
 
   return newTodosById;
 }
@@ -130,7 +131,7 @@ export function renameTodo(id, text) {
   const oldTodo = getTodo(id);
   const newTodosById = {
     ...todosById,
-    id: {
+    [id]: {
       ...oldTodo,
       text: text,
     },

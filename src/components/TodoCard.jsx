@@ -10,18 +10,18 @@ const Card = ({text, id, status}) => {
   const [changeTodoStatus, isPending] = useMutation(changeTodoStatusMutation);
 
   const handleStatusChange = () => {
-    setCurStatus(() => {
-      return !curStatus
-    })
     changeTodoStatus({
       variables: {
         TodoID: {
           id: id,
-          complete: curStatus
+          complete: !curStatus
         }
       },
       onCompleted: data => {
-        console.log(data)
+        console.log('ChangeTodoStatus', data);
+        setCurStatus(() => {
+          return !curStatus
+        })
       },
       onError: err => {
         console.log(err)
