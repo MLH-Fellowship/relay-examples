@@ -1,12 +1,13 @@
-import React from 'react'
+import React, {useState} from 'react'
 import GetTodos from '../queries/getTodos'
 import Card from './TodoCard';
 
 
-const TodoList = () => {
-    return (
+const TodoList = ({view}) => {
+
+  return (
         <div className="todos">
-          {GetTodos().viewer.todos.edges.map(edge => (
+          {GetTodos(view).viewer.todos.edges.map(edge => (
             <Card text={edge.node.text} id={edge.node.id} key={edge.node.id}/>
           ))}
         </div>

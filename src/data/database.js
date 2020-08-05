@@ -26,6 +26,7 @@ export function getTodos(status = "any") {
   if (status === "any") {
     return todos;
   }
+  console.log(status)
   return todos.filter((todo) => todo.complete === (status === "completed"));
 }
 

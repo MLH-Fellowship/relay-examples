@@ -8,17 +8,11 @@ import "./App.css";
 
 const App = () => {
 
-const [todos, setTodos] = useState(GetTodos());
-const todoList = [
-  {
-    id: 1,
-    text: 'Learn Relay',
-  },
-  {
-    id: 2,
-    text: 'Implement Relay',
-  },
-];
+  const [curView, setCurView] = useState('all')
+
+  const handleViewChange = e => {
+    setCurView(e.target.value)
+  }
 
   return (
     <div className="App">
@@ -31,11 +25,11 @@ const todoList = [
             <label htmlFor="markAllCompleted">Mark 13 as done! 🎉</label>
           </div>
           <div className="views">
-            <input type="radio" id="all" name="view" value="all"></input>
+            <input onChange={handleViewChange} type="radio" id="all" name="view" value="all"></input>
             <label htmlFor="all">all</label>
-            <input type="radio" id="active" name="view" value="active"></input>
+            <input onChange={handleViewChange} type="radio" id="active" name="view" value="active"></input>
             <label htmlFor="active">todo</label>
-            <input type="radio" id="completed" name="view" value="completed"></input>
+            <input onChange={handleViewChange} type="radio" id="completed" name="view" value="completed"></input>
             <label htmlFor="completed">7 done 💪</label>
           </div>
         </div>
@@ -43,7 +37,7 @@ const todoList = [
           <AddTodoBar/>
         </div>
         </div>
-        <TodoList/>
+        <TodoList view={curView}/>
       </div>
     </div>
   );

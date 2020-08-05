@@ -32,7 +32,7 @@ export type getTodosQuery = {|
 /*
 query getTodosQuery {
   viewer {
-    todos {
+    todos(status: "completed") {
       edges {
         node {
           id
@@ -56,7 +56,13 @@ var v0 = {
 },
 v1 = {
   "alias": null,
-  "args": null,
+  "args": [
+    {
+      "kind": "Literal",
+      "name": "status",
+      "value": "completed"
+    }
+  ],
   "concreteType": "TodoConnection",
   "kind": "LinkedField",
   "name": "todos",
@@ -100,7 +106,7 @@ v1 = {
       "storageKey": null
     }
   ],
-  "storageKey": null
+  "storageKey": "todos(status:\"completed\")"
 };
 return {
   "fragment": {
@@ -150,11 +156,11 @@ return {
     "metadata": {},
     "name": "getTodosQuery",
     "operationKind": "query",
-    "text": "query getTodosQuery {\n  viewer {\n    todos {\n      edges {\n        node {\n          id\n          text\n          complete\n        }\n      }\n    }\n    id\n  }\n}\n"
+    "text": "query getTodosQuery {\n  viewer {\n    todos(status: \"completed\") {\n      edges {\n        node {\n          id\n          text\n          complete\n        }\n      }\n    }\n    id\n  }\n}\n"
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '71063ac91e46e2cf0473ef85f59574c6';
+(node/*: any*/).hash = '04936b641220afa791082196bf6e899d';
 
 module.exports = node;
