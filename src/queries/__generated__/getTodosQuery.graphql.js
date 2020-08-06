@@ -8,7 +8,9 @@
 
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
-export type getTodosQueryVariables = {||};
+export type getTodosQueryVariables = {|
+  view?: ?string
+|};
 export type getTodosQueryResponse = {|
   +viewer: ?{|
     +todos: ?{|
@@ -30,9 +32,11 @@ export type getTodosQuery = {|
 
 
 /*
-query getTodosQuery {
+query getTodosQuery(
+  $view: String
+) {
   viewer {
-    todos(status: "completed") {
+    todos(status: $view) {
       edges {
         node {
           id
@@ -47,20 +51,28 @@ query getTodosQuery {
 */
 
 const node/*: ConcreteRequest*/ = (function(){
-var v0 = {
+var v0 = [
+  {
+    "defaultValue": null,
+    "kind": "LocalArgument",
+    "name": "view",
+    "type": "String"
+  }
+],
+v1 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
   "name": "id",
   "storageKey": null
 },
-v1 = {
+v2 = {
   "alias": null,
   "args": [
     {
-      "kind": "Literal",
+      "kind": "Variable",
       "name": "status",
-      "value": "completed"
+      "variableName": "view"
     }
   ],
   "concreteType": "TodoConnection",
@@ -84,7 +96,7 @@ v1 = {
           "name": "node",
           "plural": false,
           "selections": [
-            (v0/*: any*/),
+            (v1/*: any*/),
             {
               "alias": null,
               "args": null,
@@ -106,11 +118,11 @@ v1 = {
       "storageKey": null
     }
   ],
-  "storageKey": "todos(status:\"completed\")"
+  "storageKey": null
 };
 return {
   "fragment": {
-    "argumentDefinitions": [],
+    "argumentDefinitions": (v0/*: any*/),
     "kind": "Fragment",
     "metadata": null,
     "name": "getTodosQuery",
@@ -123,7 +135,7 @@ return {
         "name": "viewer",
         "plural": false,
         "selections": [
-          (v1/*: any*/)
+          (v2/*: any*/)
         ],
         "storageKey": null
       }
@@ -132,7 +144,7 @@ return {
   },
   "kind": "Request",
   "operation": {
-    "argumentDefinitions": [],
+    "argumentDefinitions": (v0/*: any*/),
     "kind": "Operation",
     "name": "getTodosQuery",
     "selections": [
@@ -144,8 +156,8 @@ return {
         "name": "viewer",
         "plural": false,
         "selections": [
-          (v1/*: any*/),
-          (v0/*: any*/)
+          (v2/*: any*/),
+          (v1/*: any*/)
         ],
         "storageKey": null
       }
@@ -156,11 +168,11 @@ return {
     "metadata": {},
     "name": "getTodosQuery",
     "operationKind": "query",
-    "text": "query getTodosQuery {\n  viewer {\n    todos(status: \"completed\") {\n      edges {\n        node {\n          id\n          text\n          complete\n        }\n      }\n    }\n    id\n  }\n}\n"
+    "text": "query getTodosQuery(\n  $view: String\n) {\n  viewer {\n    todos(status: $view) {\n      edges {\n        node {\n          id\n          text\n          complete\n        }\n      }\n    }\n    id\n  }\n}\n"
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '04936b641220afa791082196bf6e899d';
+(node/*: any*/).hash = '97fcddc9d25e93bc6ac95fa5958c495e';
 
 module.exports = node;

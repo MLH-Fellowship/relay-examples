@@ -1,7 +1,7 @@
 export const Todo = {};
 export const User = {};
 
-const VIEWER_ID = "user";
+const VIEWER_ID = 'user';
 const viewer = {};
 viewer.id = VIEWER_ID;
 
@@ -21,13 +21,12 @@ export function getTodo(id) {
   return todosById[id];
 }
 
-export function getTodos(status = "any") {
+export function getTodos(status = 'any') {
   const todos = todosIdsByUser[VIEWER_ID].map((id) => todosById[id]);
-  if (status === "any") {
+  if (status === 'any') {
     return todos;
   }
-  console.log(status)
-  return todos.filter((todo) => todo.complete === (status === "completed"));
+  return todos.filter((todo) => todo.complete === (status === 'completed'));
 }
 
 export function getUser() {
@@ -67,8 +66,8 @@ export function addTodo(text, complete) {
 }
 
 // Add example data
-addTodo("Learn Relay", true);
-addTodo("Implement Relay", false);
+addTodo('Learn Relay', true);
+addTodo('Implement Relay', false);
 
 // TODO: Update for todosIdsByUser
 export function changeTodoStatus(id, complete) {
@@ -103,13 +102,15 @@ export function markAllTodos(complete) {
 
 // Updated
 export function removeTodo(id) {
-
-  if(!todosById.hasOwnProperty(id)) {
-    console.log(`Attempting to delete todo ${id} but it was not found in`, todosById);
+  if (!todosById.hasOwnProperty(id)) {
+    console.log(
+      `Attempting to delete todo ${id} but it was not found in`,
+      todosById
+    );
   }
 
   delete todosById[id];
-  
+
   // todosById = todosById.filter((todo) => todo.id !== id);
   todosIdsByUser[VIEWER_ID] = todosIdsByUser[VIEWER_ID].filter(
     (oldID) => oldID !== id
