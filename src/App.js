@@ -3,15 +3,26 @@ import { useMutation } from 'react-relay/hooks';
 
 import AddTodoBar from './components/addTodoBar';
 import TodoList from './components/TodoList';
-import GetTodos from './queries/getTodos';
+
+import {TodoItemsQuery} from './queries/getTodos'
+import {
+  preloadQuery,
+  usePreloadedQuery
+} from "react-relay/hooks";
+import RelayEnvironment from "./RelayEnvironment";
+
 import { markAllTodosMutation } from './mutations/markAllTodos';
 
 import './App.css';
 
 const App = () => {
-  const [todos, setTodos] = useState(GetTodos());
   const [allStatus, setAllStatus] = useState(false);
   const [markAllTodos, isPending] = useMutation(markAllTodosMutation);
+
+  
+  const preloadedGetTodosQuery = preloadQuery(RelayEnvironment, TodoItemsQuery, {});
+  const todos =  usePreloadedQuery(TodoItemsQuery, preloadedGetTodosQuery);
+
 
   const handleStatusChange = () => {
     markAllTodos({
@@ -21,7 +32,7 @@ const App = () => {
         },
       },
       onCompleted: (data) => {
-        console.log('MarkTodoStatus', data);
+        console.log(data)
         setAllStatus(!allStatus);
       },
       onError: (err) => {
@@ -68,7 +79,7 @@ const App = () => {
             <AddTodoBar />
           </div>
         </div>
-        <TodoList />
+        <TodoList todos={todos}/>
       </div>
     </div>
   );

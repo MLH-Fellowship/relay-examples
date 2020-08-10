@@ -1,12 +1,12 @@
 import React from 'react'
-import GetTodos from '../queries/getTodos'
+
 import Card from './TodoCard';
 
+const TodoList = ({todos}) => {
 
-const TodoList = () => {
     return (
         <div className="todos">
-          {GetTodos().viewer.todos.edges.map(edge => (
+          {todos.viewer.todos.edges.map(edge => (
             <Card 
               text={edge.node.text} 
               status={edge.node.complete} 

@@ -1,13 +1,16 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import { useMutation } from 'react-relay/hooks';
 import RemoveButton from './RemoveButton';
 import {changeTodoStatusMutation} from '../mutations/changeTodoStatus';
 import './card.css'
 
 const Card = ({text, id, status}) => {
-
   const [curStatus, setCurStatus] = useState(status);
   const [changeTodoStatus, isPending] = useMutation(changeTodoStatusMutation);
+
+  useEffect(() => {
+    setCurStatus(status)
+  }, [status]);
 
   const handleStatusChange = () => {
     changeTodoStatus({
@@ -18,10 +21,7 @@ const Card = ({text, id, status}) => {
         }
       },
       onCompleted: data => {
-        console.log('ChangeTodoStatus', data);
-        setCurStatus(() => {
-          return !curStatus
-        })
+        setCurStatus(!curStatus)
       },
       onError: err => {
         console.log(err)
