@@ -1,9 +1,9 @@
 import graphql from 'babel-plugin-relay/macro';
 
 export const TodoItemsQuery = graphql `
-query getTodosQuery {
+query getTodosQuery($view: String) {
   viewer {
-    todos {
+    todos(status: $view) {
       edges {
         node {
           id
@@ -15,3 +15,4 @@ query getTodosQuery {
   }
 }
 `;
+

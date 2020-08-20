@@ -113,6 +113,7 @@ input RenameTodoInput{
 }
 
 type RenameTodoPayload {
+    viewer: User
     todo: Todo
     clientMutationId: String
 }

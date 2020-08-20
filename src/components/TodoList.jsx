@@ -1,9 +1,7 @@
 import React from 'react'
-
 import Card from './TodoCard';
 
 const TodoList = ({todos}) => {
-
     return (
         <div className="todos">
           {todos.viewer.todos.edges.map(edge => (

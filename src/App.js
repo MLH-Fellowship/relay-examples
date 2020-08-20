@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { useMutation } from 'react-relay/hooks';
 
+
 import AddTodoBar from './components/addTodoBar';
 import TodoList from './components/TodoList';
+
 
 import {TodoItemsQuery} from './queries/getTodos'
 import {
@@ -48,31 +50,42 @@ const App = () => {
         <div className="top-bar">
           <div className="menu">
             <div>
+
               <input
                 type="checkbox"
                 id="markAllCompleted"
                 checked={allStatus}
                 onChange={handleStatusChange}
               />
-              <label htmlFor="markAllCompleted">Mark 13 as done! 🎉</label>
+              <label htmlFor="markAllCompleted">
+                Mark {todoCount} as done! 🎉
+              </label>
             </div>
-            <div className="views">
-              <input type="radio" id="all" name="view" value="all"></input>
+            <div className="views"> 
+              <input
+                onChange={handleViewChange}
+                type="radio"
+                id="all"
+                name="view"
+                value="any"
+                checked={curView === 'any' ? true : false}
+              />
               <label htmlFor="all">all</label>
               <input
                 type="radio"
                 id="active"
                 name="view"
-                value="active"
-              ></input>
+                value="active" 
+              />
               <label htmlFor="active">todo</label>
               <input
+                onChange={handleViewChange}
                 type="radio"
                 id="completed"
                 name="view"
                 value="completed"
-              ></input>
-              <label htmlFor="completed">7 done 💪</label>
+              />
+              <label htmlFor="completed">{completedCount} done 💪</label>
             </div>
           </div>
           <div className="inputField">
