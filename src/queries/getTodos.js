@@ -6,9 +6,9 @@ import RelayEnvironment from "../RelayEnvironment";
 import graphql from 'babel-plugin-relay/macro';
 
 const TodoItemsQuery = graphql `
-query getTodosQuery {
+query getTodosQuery($view: String) {
   viewer {
-    todos {
+    todos(status: $view) {
       edges {
         node {
           id
@@ -22,8 +22,10 @@ query getTodosQuery {
 `;
 
 
-function GetTodos() {
-  const preloadedGetTodosQuery = preloadQuery(RelayEnvironment, TodoItemsQuery, {});
+function GetTodos(view) {
+  const preloadedGetTodosQuery = preloadQuery(RelayEnvironment, TodoItemsQuery, {
+    view: view
+  });
   return usePreloadedQuery(TodoItemsQuery, preloadedGetTodosQuery);
 }
 
