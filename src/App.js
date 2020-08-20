@@ -1,17 +1,12 @@
 import React, { useState } from 'react';
 import { useMutation } from 'react-relay/hooks';
 
-
 import AddTodoBar from './components/addTodoBar';
 import TodoList from './components/TodoList';
 
-
-import {TodoItemsQuery} from './queries/getTodos'
-import {
-  preloadQuery,
-  usePreloadedQuery
-} from "react-relay/hooks";
-import RelayEnvironment from "./RelayEnvironment";
+import { TodoItemsQuery } from './queries/getTodos';
+import { preloadQuery, usePreloadedQuery } from 'react-relay/hooks';
+import RelayEnvironment from './RelayEnvironment';
 
 import { markAllTodosMutation } from './mutations/markAllTodos';
 
@@ -19,12 +14,28 @@ import './App.css';
 
 const App = () => {
   const [allStatus, setAllStatus] = useState(false);
+  const [curView, setCurView] = useState('any');
   const [markAllTodos, isPending] = useMutation(markAllTodosMutation);
+  // const [count, setCount] = useState(0);
 
-  
-  const preloadedGetTodosQuery = preloadQuery(RelayEnvironment, TodoItemsQuery, {});
-  const todos =  usePreloadedQuery(TodoItemsQuery, preloadedGetTodosQuery);
+  const handleViewChange = (e) => {
+    setCurView(e.target.value);
+  };
 
+  const preloadedGetTodosQuery = preloadQuery(
+    RelayEnvironment,
+    TodoItemsQuery,
+    {}
+  );
+  const todos = usePreloadedQuery(TodoItemsQuery, preloadedGetTodosQuery);
+
+  // todos.viewer.todos.edges.forEach((node) => {
+  //   if (node.complete) {
+  //     setCount(count + 1);
+  //   }
+  //   console.log('inside todos');
+  //   console.log(node);
+  // });
 
   const handleStatusChange = () => {
     markAllTodos({
@@ -34,7 +45,7 @@ const App = () => {
         },
       },
       onCompleted: (data) => {
-        console.log(data)
+        console.log(data);
         setAllStatus(!allStatus);
       },
       onError: (err) => {
@@ -50,7 +61,6 @@ const App = () => {
         <div className="top-bar">
           <div className="menu">
             <div>
-
               <input
                 type="checkbox"
                 id="markAllCompleted"
@@ -58,10 +68,10 @@ const App = () => {
                 onChange={handleStatusChange}
               />
               <label htmlFor="markAllCompleted">
-                Mark {todoCount} as done! 🎉
+                Mark {`todoCount`} as done! 🎉
               </label>
             </div>
-            <div className="views"> 
+            <div className="views">
               <input
                 onChange={handleViewChange}
                 type="radio"
@@ -71,12 +81,7 @@ const App = () => {
                 checked={curView === 'any' ? true : false}
               />
               <label htmlFor="all">all</label>
-              <input
-                type="radio"
-                id="active"
-                name="view"
-                value="active" 
-              />
+              <input type="radio" id="active" name="view" value="active" />
               <label htmlFor="active">todo</label>
               <input
                 onChange={handleViewChange}
@@ -85,14 +90,14 @@ const App = () => {
                 name="view"
                 value="completed"
               />
-              <label htmlFor="completed">{completedCount} done 💪</label>
+              <label htmlFor="completed">{`completedCount`} done 💪</label>
             </div>
           </div>
           <div className="inputField">
             <AddTodoBar />
           </div>
         </div>
-        <TodoList todos={todos}/>
+        <TodoList todos={todos} />
       </div>
     </div>
   );
