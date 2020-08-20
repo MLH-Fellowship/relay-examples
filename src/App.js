@@ -1,7 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React, { Suspense } from "react";
 import "./App.css";
-import fetchGraphQL from "./fetchGraphQL";
+import {
+  RelayEnvironmentProvider,
+} from "react-relay/hooks";
+import RelayEnvironment from "./RelayEnvironment";
 
+<<<<<<< queries/getTodos
+import GetTodos from './queries/getTodos'
+
+function AppRoot() {
+  return (
+    <RelayEnvironmentProvider environment={RelayEnvironment}>
+      <Suspense fallback={"Loading"}>
+        <GetTodos />
+      </Suspense>
+    </RelayEnvironmentProvider>
+=======
 import Card from './components/TodoCard';
 
 const todoList = [
@@ -58,7 +72,8 @@ function App() {
         </div>
       </div>
     </div>
+>>>>>>> develop
   );
 }
 
-export default App;
+export default AppRoot;
