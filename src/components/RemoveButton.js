@@ -1,7 +1,6 @@
 import React from 'react';
 import { useMutation } from 'react-relay/hooks';
 import { removeTodoMutation } from '../mutations/removeTodo';
-// import { removeTodo } from '../data/database';
 
 const RemoveButton = ({ id }) => {
   const [removeTodo, isPending] = useMutation(removeTodoMutation);

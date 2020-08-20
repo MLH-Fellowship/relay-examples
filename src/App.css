@@ -58,6 +58,11 @@ h1.headline {
   color: white
 }
 
+.inputField > input:focus {
+  outline: none;
+  background: rgba(252, 92, 4, 0.95);
+}
+
 .todos {
   display: flex;
   flex-direction: column;

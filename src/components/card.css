@@ -33,7 +33,7 @@
     color: red;
 }
 
-.done {
+.status {
     margin-right: 0.5rem;
 }
 
@@ -44,4 +44,9 @@
     font-size: 1.25rem;
     border: none;
     cursor: default;
+}
+
+.text-done {
+    color: rgba(0, 0, 0, 0.45);
+    text-decoration: line-through;
 }

@@ -39,10 +39,9 @@ export function getViewer() {
 
 // Mutations
 
-// Updated
 export function addTodo(text, complete) {
   const todo = {
-    id: `${nextToDoId}`,
+    id: nextToDoId,
     text,
     complete: Boolean(complete),
   };
@@ -60,7 +59,7 @@ export function addTodo(text, complete) {
   todosById = newTodosById;
   todosIdsByUser = newTodosIdsByUser;
 
-  nextToDoId = parseInt(nextToDoId) + 1;
+  nextToDoId = nextToDoId + 1;
 
   return todo.id;
 }
@@ -69,24 +68,23 @@ export function addTodo(text, complete) {
 addTodo('Learn Relay', true);
 addTodo('Implement Relay', false);
 
-// TODO: Update for todosIdsByUser
 export function changeTodoStatus(id, complete) {
+  
   const oldTodo = getTodo(id);
-
   const newTodosById = {
     ...todosById,
-    id: {
+    [id]: {
       ...oldTodo,
       complete: complete,
     },
   };
 
   todosById = newTodosById;
+  console.log(todosById)
 
   return newTodosById;
 }
 
-// Updated
 export function markAllTodos(complete) {
   const newTodosById = {};
   getTodos().forEach((todo) => {
@@ -100,7 +98,6 @@ export function markAllTodos(complete) {
   return newTodosById;
 }
 
-// Updated
 export function removeTodo(id) {
   if (!todosById.hasOwnProperty(id)) {
     console.log(
@@ -119,7 +116,6 @@ export function removeTodo(id) {
   return todosIdsByUser;
 }
 
-// Updated
 export function removeCompletedTodos() {
   const newTodosById = getTodos().filter((todo) => !todo.complete);
   let newTodosIdsByUser = [];
@@ -133,7 +129,6 @@ export function removeCompletedTodos() {
   return newTodosById;
 }
 
-// Updated
 export function renameTodo(id, text) {
   const oldTodo = getTodo(id);
   const newTodosById = {
