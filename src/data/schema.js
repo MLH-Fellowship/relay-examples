@@ -228,6 +228,10 @@ const RenameTodoMutation = new mutationWithClientMutationId({
     text: { type: new GraphQLNonNull(GraphQLString) },
   },
   outputFields: {
+    viewer: {
+      type: UserType,
+      resolve: getViewer
+    },
     todo: {
       type: TodoType,
       resolve: ({ todoId }) => getTodo(todoId),
